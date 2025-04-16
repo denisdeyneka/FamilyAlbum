@@ -1,4 +1,4 @@
-// Определение SCSS-переменных
+@use "sass:color";
 $primary-color: #3498db;
 $secondary-color: #2ecc71;
 
@@ -18,7 +18,7 @@ $secondary-color: #2ecc71;
 
 body {
     font-family: 'Arial', sans-serif;
-    background-color: #f4f4f4;
+    background-color: #35ae4bbe;
     color: #333;
     line-height: 1.6;  
 }

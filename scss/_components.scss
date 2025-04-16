@@ -1,3 +1,5 @@
+@use "sass:color";
+
 /* Buttons, cards, modals etc. */
 @use 'base' as *; // Подключаем _base.scss и делаем его переменные глобальными
 
@@ -10,7 +12,7 @@
     cursor: pointer;
   
     &:hover {
-      background-color: darken($primary-color, 10%);
+      background-color: color.adjust($primary-color, $lightness: -10%);
     }
   }
   
