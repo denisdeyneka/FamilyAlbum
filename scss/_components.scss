@@ -1,0 +1,22 @@
+/* Buttons, cards, modals etc. */
+@use 'base' as *; // Подключаем _base.scss и делаем его переменные глобальными
+
+.button {
+    background-color: $primary-color;
+    color: white;
+    padding: 0.5rem 1rem;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+  
+    &:hover {
+      background-color: darken($primary-color, 10%);
+    }
+  }
+  
+.card {
+    background: white;
+    border-radius: 12px;
+    padding: 1rem;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+  }

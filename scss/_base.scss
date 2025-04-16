@@ -1,0 +1,24 @@
+// Определение SCSS-переменных
+$primary-color: #3498db;
+$secondary-color: #2ecc71;
+
+// Также определим CSS-переменные (на будущее)
+:root {
+    --primary-color: #3498db;
+    --secondary-color: #2ecc71;
+}
+
+
+// Reset и базовые стили
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+  }
+
+body {
+    font-family: 'Arial', sans-serif;
+    background-color: #f4f4f4;
+    color: #333;
+    line-height: 1.6;  
+}

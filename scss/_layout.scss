@@ -1,0 +1,18 @@
+/* Page layout structure */
+
+@use 'base' as *;  // Подключаем _base.scss и делаем его переменные глобальными
+
+
+.container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 20px;
+  }
+
+.header,
+.footer {
+    text-align: center;
+    padding: 1rem;
+    background-color: var(--primary-color);
+    color: white;
+}
