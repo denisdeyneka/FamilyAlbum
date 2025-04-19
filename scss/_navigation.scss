@@ -1,0 +1,61 @@
+@use 'base' as *;
+
+nav {
+    background: #6fab42;
+    border-bottom: 1px solid #ddd;
+    padding: 0.5rem 1rem;
+    position: relative;
+  
+    .menu-toggle {
+      display: none;
+      background: none;
+      border: none;
+      font-size: 2rem;
+      cursor: pointer;
+    }
+  
+    ul {
+
+        list-style: none;
+        padding: 0;
+        margin: 0;
+        display: flex; // <-- делает список горизонтальным
+        gap: 1rem;      // расстояние между пунктами (по желанию)
+        justify-content: flex-start; // можно изменить на center/right
+        align-items: center;
+       
+        li a {
+            text-decoration: none;
+            padding: 0.5rem 1rem;
+            display: block;
+        }           
+    }
+
+  // 📱 Мобильная адаптация
+  @media (max-width: 768px) {
+    .menu-toggle {
+      display: block;
+    }
+
+    ul {
+      display: none;
+      flex-direction: column;
+      gap: 0;
+      position: absolute;
+      top: 100%;
+      left: 0;
+      width: 100%;
+      background: #44117d;
+      box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+
+      &.open {
+        display: flex;
+      }
+  
+      li a {
+        padding: 1rem;
+        border-top: 1px solid #ddd;
+      }
+    }
+  }
+}

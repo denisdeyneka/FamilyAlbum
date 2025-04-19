@@ -1,24 +1,23 @@
 @use "sass:color";
-
-/* Buttons, cards, modals etc. */
 @use 'base' as *; // Подключаем _base.scss и делаем его переменные глобальными
+/* Buttons, cards, modals etc. */
 
 .button {
-    background-color: $primary-color;
-    color: white;
-    padding: 0.5rem 1rem;
-    border: none;
-    border-radius: 8px;
-    cursor: pointer;
-  
-    &:hover {
-      background-color: color.adjust($primary-color, $lightness: -10%);
-    }
+  background-color: $primary-color;
+  color: rgb(212, 26, 26);  
+  padding: 0.5rem 1rem;
+  border: none;
+  border-radius: 8px;
+  cursor:    pointer;
+
+  &:hover {
+    background-color: color.adjust($primary-color, $lightness: -10%);
   }
+}
   
 .card {
-    background: white;
-    border-radius: 12px;
-    padding: 1rem;
-    box-shadow: 0 2px 8px rgba(0,0,0,0.1);
-  }
+  background: white;
+  border-radius: 12px;
+  padding: 1rem;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+}
