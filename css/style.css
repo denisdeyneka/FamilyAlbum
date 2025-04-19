@@ -66,6 +66,75 @@ body {
   transition: transform 0.3s ease;
 }
 
+.upload-section {
+  max-width: 100%;
+  padding: 1rem 2rem;
+  display: flex;
+  justify-content: center;
+}
+.upload-section form {
+  display: flex;
+  gap: 1rem;
+  flex-direction: column;
+}
+.upload-section form .upload-label,
+.upload-section form .upload-btn {
+  align-self: flex-start;
+}
+.upload-section form .drop-zone {
+  display: none;
+  width: 100%;
+  height: 150px;
+  border: 2px dashed #0077cc;
+  border-radius: 8px;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  color: #555;
+  background-color: #f8f8f8;
+  transition: background-color 0.3s ease;
+}
+.upload-section form .drop-zone.dragover {
+  background-color: #e0f3ff;
+}
+.upload-section form .upload-label {
+  font-weight: 600;
+  cursor: pointer;
+}
+.upload-section form .upload-label input[type=file] {
+  display: block;
+  margin-top: 0.5rem;
+}
+.upload-section form .upload-btn {
+  padding: 5rem 1.2rem;
+  border: none;
+  background-color: #0077cc;
+  color: white;
+  border-radius: 8px;
+  font-size: 1rem;
+  cursor: pointer;
+}
+.upload-section form .upload-btn:hover {
+  background-color: #005fa3;
+}
+
+@media (max-width: 768px) {
+  .upload-section {
+    padding: 1rem;
+  }
+  .upload-section form {
+    flex-direction: column;
+    align-items: stretch;
+  }
+  .upload-section form .upload-btn {
+    width: 100%;
+  }
+}
+@media (min-width: 769px) {
+  .upload-section form .drop-zone {
+    display: flex;
+  }
+}
 nav {
   background: #6fab42;
   border-bottom: 1px solid #ddd;
@@ -105,11 +174,12 @@ nav ul li a {
     top: 100%;
     left: 0;
     width: 100%;
-    background: #44117d;
+    background: #44d873;
     box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
   }
   nav ul.open {
     display: flex;
+    opacity: 0.9;
   }
   nav ul li a {
     padding: 1rem;
