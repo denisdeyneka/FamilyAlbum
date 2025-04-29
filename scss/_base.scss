@@ -1,24 +1,30 @@
-@use "sass:color";
-$primary-color: #3498db;
+// Цвета
+$color-primary: #6fab42; // Основной зелёный
+$color-primary-dark: #33720e; // Темнее для эффектов
+$color-accent: #f6da0e; // Акцент (жёлтый текст)
+$color-light: #44d873; // Светлый зелёный (фон мобильного меню)
+$color-border: #ddd; // Цвет границ
+$color-text: #ffffff; // Белый текст
+@use 'sass:color';
+//$primary-color: #3498db;
 $secondary-color: #2ecc71;
 
 // Также определим CSS-переменные (на будущее)
 :root {
-    --primary-color: #3498db;
-    --secondary-color: #2ecc71;
+  --primary-color: #3498db;
+  --secondary-color: #2ecc71;
 }
-
 
 // Reset и базовые стили
 * {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-  }
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
 
 body {
-    font-family: 'Arial', sans-serif;
-    background-color: #35ae4bbe;
-    color: #333;
-    line-height: 1.6;  
+  font-family: 'Arial', sans-serif;
+  background-color: #35ae4bbe;
+  color: #333;
+  line-height: 1.6;
 }

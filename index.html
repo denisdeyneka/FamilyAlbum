@@ -1,36 +1,41 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-		<meta charset="UTF-8">
-		<meta name="viewport" content="width=device-width, initial-scale=1.0">
-		<title>Family Album</title>
-		<link rel="stylesheet" href="./css/style.css">
-		<script type="module" src="js/app.js" defer></script>
-</head>
-<body>
-		<header>
-				<h1>Welcome to the Family Album</h1>
-				<nav>
-						<button class="menu-toggle" id="menuBtn">☰</button>
-						<ul class="nav-menu" id="menuList">
-							<li><a href="#">Главная</a></li>
-							<li><a href="#">Галерея</a></li>
-							<li><a href="#" data-section="upload">Загрузка</a></li>
-							<li><a href="#">про нас</a></li>
-						</ul>
-				</nav>
-		</header>
-		<section id="upload" class="upload-section" style="display: none;">
-			<form id="upload-form">
-				<label for="photo-input" class="upload-label">
-					<span class="upload-icon">📷</span>
-					<input type="file" id="photo-input" accept="image/*" multiple>
-				</label>
-				<button type="submit" class="upload-btn	">Завантажити</button>
-				<div class="drop-zone">
-					<p>Перетягни фото сюди</p>
-				</div>
-			</form>
-		</section>
-</body>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Family Album</title>
+    <link rel="stylesheet" href="./css/style.css" />
+    <script type="module" src="js/app.js" defer></script>
+  </head>
+  <body>
+    <header>
+      <h1>Welcome to the Family Album</h1>
+      <nav>
+        <button class="menu-toggle" id="menuBtn">
+          <span></span>
+          <span></span>
+          <span></span>
+        </button>
+        <ul class="nav-menu" id="menuList">
+          <li><a href="#">Главная</a></li>
+          <li><a href="#">Галерея</a></li>
+          <li><a href="#" data-section="upload">Загрузка</a></li>
+          <li><a href="#">про нас</a></li>
+        </ul>
+      </nav>
+    </header>
+    <section id="upload" class="upload-section" style="display: none">
+      <form id="upload-form">
+        <label for="photo-input" class="upload-label">
+          <span class="upload-icon">📷</span>
+          <input type="file" id="photo-input" accept="image/*" multiple />
+        </label>
+        <button type="submit" class="upload-btn">Завантажити</button>
+        <div class="drop-zone">
+          <p>Перетягни фото сюди</p>
+        </div>
+      </form>
+    </section>
+    <div id="preview-container"></div>
+  </body>
 </html>
