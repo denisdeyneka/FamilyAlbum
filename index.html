@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Family Album</title>
     <link rel="stylesheet" href="./css/style.css" />
+    <script src="https://cdn.jsdelivr.net/npm/exif-js"></script>
     <script type="module" src="js/app.js" defer></script>
   </head>
   <body>
@@ -20,7 +21,7 @@
           <li><a href="#">Главная</a></li>
           <li><a href="#" data-section="gallery">Галерея</a></li>
           <li><a href="#" data-section="upload">Загрузка</a></li>
-          <li><a href="#">про нас</a></li>
+          <li><a href="#">Про нас</a></li>
         </ul>
       </nav>
     </header>
@@ -39,7 +40,7 @@
           <p>Перетягни фото сюди</p>
         </div>
       </form>
-      <div id="preview-container"></div>
+      <div id="preview-container" style="display: none"></div>
     </section>
   </body>
 </html>
