@@ -50,6 +50,8 @@ export function initUpload() {
     initGallery(); // перерисовываем
   });
 
+  // Функция для обработки файлов
+  // и отображения их в контейнере предпросмотра
   function handleFiles(files) {
     Array.from(files).forEach((file) => {
       if (file && file.type.startsWith('image/')) {
