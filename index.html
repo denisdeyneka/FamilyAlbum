@@ -18,12 +18,16 @@
         </button>
         <ul class="nav-menu" id="menuList">
           <li><a href="#">Главная</a></li>
-          <li><a href="#">Галерея</a></li>
+          <li><a href="#" data-section="gallery">Галерея</a></li>
           <li><a href="#" data-section="upload">Загрузка</a></li>
           <li><a href="#">про нас</a></li>
         </ul>
       </nav>
     </header>
+    <section id="gallery" class="gallery-section">
+      <h2>Галерея</h2>
+      <div class="gallery-container" id="galleryContainer"></div>
+    </section>
     <section id="upload" class="upload-section" style="display: none">
       <form id="upload-form">
         <label for="photo-input" class="upload-label">
@@ -35,7 +39,7 @@
           <p>Перетягни фото сюди</p>
         </div>
       </form>
+      <div id="preview-container"></div>
     </section>
-    <div id="preview-container"></div>
   </body>
 </html>

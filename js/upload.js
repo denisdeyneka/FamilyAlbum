@@ -1,82 +1,133 @@
 export function initUpload() {
-  // Инициализация функции загрузки изображений
+  // Получаем элементы формы, инпут и контейнер предпросмотра
+  const photoInput = document.getElementById('photo-input'); // Поле выбора файлов
+  const previewContainer = document.getElementById('preview-container'); // Контейнер для предпросмотра
+  const dropZone = document.querySelector('.drop-zone'); // Зона перетаскивания
+  const uploadForm = document.getElementById('upload-form'); // Форма загрузки
+  const uploadButton = document.querySelector('.upload-btn'); // Кнопка "Загрузить"
 
-  // Получаем элементы
-  const photoInput = document.getElementById('photo-input');
-  const previewContainer = document.getElementById('preview-container'); // Контейнер для предварительного просмотра
-  const dropZone = document.querySelector('.drop-zone'); // Элемент для перетаскивания файлов
+  // Загружаем уже сохранённые изображения из localStorage
+  const savedImages = loadImagesFromStorage(); // [{ id, dataUrl }, ...]
+  renderImages(savedImages); // Показываем их при загрузке страницы
 
-  // Слушаем выбор файлов через стандартное окно загрузки
-  photoInput.addEventListener('change', handleFileSelect);
+  // Обработчик обычной загрузки через input
+  photoInput.addEventListener('change', (event) => {
+    const files = event.target.files;
+    handleFiles(files); // Обрабатываем выбранные файлы
+  });
 
-  // Слушаем события на перетаскивание файлов
-  dropZone.addEventListener('dragover', handleDragOver);
-  dropZone.addEventListener('dragleave', handleDragLeave);
-  dropZone.addEventListener('drop', handleDrop);
+  // Обработка drag-and-drop
+  dropZone.addEventListener('dragover', (e) => {
+    e.preventDefault(); // Отключаем поведение браузера по умолчанию
+    dropZone.classList.add('dragover'); // Визуальный эффект при перетаскивании
+  });
 
-  // Функция для обработки выбора файлов через стандартное окно
-  function handleFileSelect(event) {
-    const files = event.target.files; // Получаем выбранные файлы
+  dropZone.addEventListener('dragleave', () => {
+    dropZone.classList.remove('dragover'); // Убираем эффект при выходе
+  });
 
-    // Очищаем контейнер предварительного просмотра
+  dropZone.addEventListener('drop', (e) => {
+    e.preventDefault(); // Отмена действия браузера
+    dropZone.classList.remove('dragover'); // Убираем эффект
+    const files = e.dataTransfer.files; // Получаем файлы, которые перетащили
+    handleFiles(files); // Обрабатываем их
+  });
+
+  // Отмена отправки формы по умолчанию (если кто-то нажмёт кнопку)
+  uploadForm.addEventListener('submit', (e) => {
+    e.preventDefault(); // Мы не отправляем форму на сервер пока
+  });
+
+  // Обработчик клика по кнопке "Загрузить"
+  uploadButton.addEventListener('click', (e) => {
+    e.preventDefault(); // Останавливаем действие по умолчанию
+
+    // Перемещаем все изображения из превью в галерею и сохраняем в localStorage
+    const imagesToSave = Array.from(
+      previewContainer.querySelectorAll('img')
+    ).map((img) => {
+      return {
+        id: img.dataset.id,
+        dataUrl: img.src,
+      };
+    });
+
+    // Сохраняем изображения в localStorage
+    imagesToSave.forEach(saveImageToStorage);
+
+    // Очищаем контейнер для предпросмотра
     previewContainer.innerHTML = '';
+    previewContainer.style.display = 'none'; // Скрываем контейнер
 
-    // Перебираем файлы и создаем для каждого превью
+    // Перерисовываем галерею с новыми изображениями
+    renderImages(loadImagesFromStorage());
+  });
+
+  /**
+   * Обработка загруженных файлов
+   */
+  function handleFiles(files) {
     Array.from(files).forEach((file) => {
       if (file && file.type.startsWith('image/')) {
-        // Проверяем, что файл - изображение
-        const reader = new FileReader(); // Создаем FileReader для чтения файла
+        const reader = new FileReader();
 
-        // Когда файл загружен, создаем элемент img и добавляем его в контейнер
-        reader.onload = function (e) {
-          const img = document.createElement('img');
-          img.src = e.target.result; // Устанавливаем src изображения
-          img.classList.add('preview-image'); // Добавляем класс для стилей
-          previewContainer.appendChild(img); // Добавляем изображение в контейнер
+        reader.onload = (e) => {
+          const dataUrl = e.target.result; // Base64-строка изображения
+          const id = crypto.randomUUID(); // Уникальный идентификатор для каждого изображения
+
+          const imageObject = { id, dataUrl }; // Объект с id и содержимым
+
+          previewImage(imageObject); // Показываем изображение в интерфейсе
         };
 
-        reader.readAsDataURL(file); // Читаем файл как Data URL
+        reader.readAsDataURL(file); // Читаем как base64
       }
+    });
+
+    previewContainer.style.display = 'block'; // Показываем контейнер с превью
+  }
+
+  /**
+   * Предпросмотр одного изображения
+   */
+  function previewImage({ id, dataUrl }) {
+    const img = document.createElement('img');
+    img.src = dataUrl;
+    img.classList.add('preview-image');
+    img.dataset.id = id; // Добавляем id для будущего удаления
+    previewContainer.appendChild(img);
+  }
+
+  /**
+   * Отрисовка всех сохранённых изображений в галерее
+   */
+  function renderImages(images) {
+    const galleryContainer = document.getElementById('galleryContainer');
+    galleryContainer.innerHTML = ''; // Очищаем перед рендером
+
+    images.forEach((image) => {
+      const img = document.createElement('img');
+      img.src = image.dataUrl;
+      img.alt = 'Фото';
+      img.classList.add('gallery-image');
+      galleryContainer.appendChild(img);
     });
   }
 
-  // Функция для обработки перетаскивания файлов
-  function handleDragOver(event) {
-    event.preventDefault(); // Останавливаем стандартное поведение браузера
-    dropZone.classList.add('dragover'); // Добавляем класс для визуального эффекта
+  /**
+   * Загрузка изображений из localStorage
+   */
+  function loadImagesFromStorage() {
+    const raw = localStorage.getItem('familyAlbumImages');
+    return raw ? JSON.parse(raw) : [];
   }
 
-  // Функция для обработки выхода из зоны перетаскивания
-  function handleDragLeave() {
-    dropZone.classList.remove('dragover'); // Убираем эффект визуального наведения
-  }
-
-  // Функция для обработки события "падения" файла в зону
-  function handleDrop(event) {
-    event.preventDefault(); // Останавливаем стандартное поведение браузера
-    dropZone.classList.remove('dragover'); // Убираем эффект визуального наведения
-
-    const files = event.dataTransfer.files; // Получаем файлы из события
-
-    // Очищаем контейнер предварительного просмотра
-    previewContainer.innerHTML = '';
-
-    // Перебираем файлы и создаем для каждого превью
-    Array.from(files).forEach((file) => {
-      if (file && file.type.startsWith('image/')) {
-        // Проверяем, что файл - изображение
-        const reader = new FileReader(); // Создаем FileReader для чтения файла
-
-        // Когда файл загружен, создаем элемент img и добавляем его в контейнер
-        reader.onload = function (e) {
-          const img = document.createElement('img');
-          img.src = e.target.result; // Устанавливаем src изображения
-          img.classList.add('preview-image'); // Добавляем класс для стилей
-          previewContainer.appendChild(img); // Добавляем изображение в контейнер
-        };
-
-        reader.readAsDataURL(file); // Читаем файл как Data URL
-      }
-    });
+  /**
+   * Сохранение одного изображения в localStorage
+   */
+  function saveImageToStorage(imageObject) {
+    const current = loadImagesFromStorage(); // Загружаем текущие изображения
+    current.push(imageObject); // Добавляем новое изображение
+    localStorage.setItem('familyAlbumImages', JSON.stringify(current)); // Сохраняем в localStorage
   }
 }
