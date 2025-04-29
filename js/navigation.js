@@ -1,16 +1,12 @@
-// js/navigation.js
-
 export function initNavigation() {
-  const menuBtn = document.getElementById('menuBtn');
-  const menuList = document.getElementById('menuList');
-  console.log('initNavigation called', menuBtn, menuList); // Debugging line
+  const menuBtn = document.getElementById('menuBtn'); // Кнопка меню
+  const menuList = document.getElementById('menuList'); // Список меню
 
   // Обработчик для кнопки меню
   if (menuBtn && menuList) {
     menuBtn.addEventListener('click', () => {
-      menuList.classList.toggle('open');
+      menuList.classList.toggle('open'); // Открываем/закрываем меню
       menuBtn.classList.toggle('open'); // для визуализации кнопки
-      console.log('Menu button clicked, toggling m enu'); // Debugging line
     });
   }
 
@@ -18,12 +14,13 @@ export function initNavigation() {
   const links = document.querySelectorAll('.nav-menu a'); // Все ссылки в меню
   const sections = document.querySelectorAll('section'); // Все секции на странице
 
+  // Получаем все ссылки в меню
   links.forEach((link) => {
+    // Добавляем обработчик клика на каждую ссылку
     link.addEventListener('click', (e) => {
       e.preventDefault();
 
       const targetId = link.dataset.section; // Получаем id секции из атрибута data-section
-      console.log(`Link clicked: ${targetId}`); // Для отладки
       sections.forEach((sec) => (sec.style.display = 'none')); // Скрываем все секции
 
       // Показываем нужную секцию
